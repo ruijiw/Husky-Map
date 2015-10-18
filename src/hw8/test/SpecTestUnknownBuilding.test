@@ -1,0 +1,15 @@
+# Test the program has the correct output for unknown buildings
+r
+KNE
+UNKNOWN
+
+r
+UNKNOWN
+IMA
+
+r
+UNKNOWN
+UNKNOWN
+
+# complete this test
+q

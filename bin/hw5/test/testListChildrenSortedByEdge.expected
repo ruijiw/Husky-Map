@@ -1,0 +1,22 @@
+# Specification testing file for star war
+# Tests that sort algorithm is correct
+
+# Create the graph
+created graph h
+
+# Add multiple nodes
+added node n to h
+added node n1 to h
+added node n2 to h
+added node n3 to h
+
+# Add an edge
+added edge eZ from n to n1 in h
+added edge eA from n to n1 in h
+added edge e3 from n to n3 in h
+added edge eA from n to n2 in h
+added edge eJ from n to n2 in h
+added edge eZ from n to n2 in h
+
+# Print the nodes in the graph and the outgoing edges from n
+the children of n in h are: n1(eA) n1(eZ) n2(eA) n2(eJ) n2(eZ) n3(e3)

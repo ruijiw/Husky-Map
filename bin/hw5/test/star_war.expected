@@ -1,0 +1,18 @@
+# Specification testing file for star war
+# Tests that sort algorithm is correct
+
+# Create the graph
+created graph h
+
+# Add multiple nodes
+added node n1 to h
+added node Han_Solo to h
+added node Princess_Leah to h
+
+# Add an edge
+added edge cool_hair from n1 to Princess_Leah in h
+added edge love from n1 to Han_Solo in h
+
+# Print the nodes in the graph and the outgoing edges from n1
+h contains: Han_Solo Princess_Leah n1
+the children of n1 in h are: Han_Solo(love) Princess_Leah(cool_hair)

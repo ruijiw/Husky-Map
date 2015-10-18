@@ -1,0 +1,31 @@
+Menu:
+	r to find a route
+	b to see a list of all buildings
+	q to quit
+
+Enter an option ('m' to see the menu): # Test the program can find the shortest path between two buildings
+Abbreviated name of starting building: Abbreviated name of ending building: Path from Paul G. Allen Center for Computer Science & Engineering to Intramural Activities Building:
+	Walk 62 feet E to (2291, 1721)
+	Walk 52 feet S to (2298, 1745)
+	Walk 37 feet E to (2316, 1747)
+	Walk 35 feet S to (2314, 1764)
+	Walk 52 feet S to (2309, 1789)
+	Walk 93 feet SE to (2349, 1807)
+	Walk 70 feet E to (2382, 1816)
+	Walk 67 feet E to (2413, 1825)
+	Walk 37 feet E to (2431, 1827)
+	Walk 107 feet E to (2479, 1843)
+	Walk 35 feet E to (2496, 1846)
+	Walk 46 feet E to (2517, 1852)
+	Walk 171 feet E to (2595, 1877)
+	Walk 50 feet NE to (2609, 1856)
+	Walk 22 feet NW to (2605, 1848)
+	Walk 97 feet N to (2615, 1802)
+	Walk 69 feet N to (2616, 1770)
+	Walk 52 feet N to (2621, 1746)
+	Walk 173 feet NE to (2689, 1700)
+	Walk 74 feet E to (2722, 1710)
+Total distance: 1400 feet
+
+Enter an option ('m' to see the menu): 
+# complete this test

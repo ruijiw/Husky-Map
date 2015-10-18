@@ -1,0 +1,12 @@
+# Find a path using the LOLDictionary dataSet.
+# This test uses the parser, the MarvelPaths2's setUpGraph
+# and Dijkstra algorithm and applies to a targeted dataSet.
+# This test is for the user asks for the character to itself case.
+
+loaded graph dictionary
+
+path from TEEMO to TEEMO:
+total cost: 0.000
+
+path from JINX to JINX:
+total cost: 0.000

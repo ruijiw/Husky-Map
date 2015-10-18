@@ -1,0 +1,21 @@
+# Find a path using the LOLDictionary dataSet.
+# This test uses the parser, the MarvelPaths2's setUpGraph
+# and Dijkstra algorithm and applies to a targeted dataSet.
+# This test is for find path after the client adding additional edge.
+
+loaded graph dictionary
+
+added edge 0.500 from TEEMO to LEBLANC in dictionary
+
+path from TEEMO to LEBLANC:
+TEEMO to LEBLANC with weight 0.500
+total cost: 0.500
+
+added edge 0.500 from TEEMO to CATLYN in dictionary
+
+added edge 0.300 from CATLYN to JINX in dictionary
+
+path from TEEMO to JINX:
+TEEMO to CATLYN with weight 0.500
+CATLYN to JINX with weight 0.300
+total cost: 0.800

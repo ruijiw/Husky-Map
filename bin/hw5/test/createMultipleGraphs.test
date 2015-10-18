@@ -1,0 +1,55 @@
+# Specification testing file.
+# Tests that 6 graphs can be created, a 2 nodes for each
+# graph an edge between them can be added, and the two nodes
+# each graph can be printed
+
+
+# Create graphs
+CreateGraph graph1
+CreateGraph graph2
+CreateGraph graph3
+CreateGraph graph4
+CreateGraph graph5
+CreateGraph graph6
+CreateGraph graph7
+
+# Add 2 nodes to each graph
+AddNode graph1 n1
+AddNode graph1 n2
+AddNode graph2 n1
+AddNode graph2 n2
+AddNode graph3 n1
+AddNode graph3 n2
+AddNode graph4 n1
+AddNode graph4 n2
+AddNode graph5 n1
+AddNode graph5 n2
+AddNode graph6 n1
+AddNode graph6 n2
+AddNode graph7 n1
+AddNode graph7 n2
+
+# Add an edge to each graph
+AddEdge graph1 n1 n2 e1
+AddEdge graph2 n1 n2 e1
+AddEdge graph3 n1 n2 e1
+AddEdge graph4 n1 n2 e1
+AddEdge graph5 n1 n2 e1
+AddEdge graph6 n1 n2 e1
+AddEdge graph7 n1 n2 e1
+
+# Print the nodes in the graph and the outgoing edges from n1
+ListNodes graph1
+ListNodes graph2
+ListNodes graph3
+ListNodes graph4
+ListNodes graph5
+ListNodes graph6
+ListNodes graph7
+ListChildren graph1 n1
+ListChildren graph2 n1
+ListChildren graph3 n1
+ListChildren graph4 n1
+ListChildren graph5 n1
+ListChildren graph6 n1
+ListChildren graph7 n1

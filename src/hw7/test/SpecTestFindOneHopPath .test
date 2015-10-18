@@ -1,0 +1,16 @@
+# Find a path using the LOLDictionary dataSet.
+# This test uses the parser, the MarvelPaths2's setUpGraph
+# and Dijkstra algorithm and applies to a targeted dataSet.
+# This test is for one character have one hop("edge") path to another character.
+
+LoadGraph dictionary LOLDictionary.tsv
+
+FindPath dictionary TEEMO LEBLANC
+
+FindPath dictionary VI TEEMO
+
+FindPath dictionary TEEMO JINX
+
+FindPath dictionary JINX SONA
+
+FindPath dictionary SIVIR TEEMO

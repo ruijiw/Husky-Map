@@ -1,0 +1,12 @@
+# Find a path using the LOLDictionary dataSet.
+# This test uses both the parser and BFS algorithm in the MarvelPaths
+# class and applies to a targeted dataset. This test is for one
+# character have two hop("edge") path to another character.
+
+LoadGraph dictionary LOLDictionary.tsv
+
+FindPath dictionary CATLYN VI
+
+FindPath dictionary RIVEN SIVIR
+
+FindPath dictionary VI AHRI 

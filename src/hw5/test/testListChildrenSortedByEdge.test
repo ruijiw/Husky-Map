@@ -1,0 +1,22 @@
+# Specification testing file for star war
+# Tests that sort algorithm is correct
+
+# Create the graph
+CreateGraph h
+
+# Add multiple nodes
+AddNode h n
+AddNode h n1
+AddNode h n2
+AddNode h n3
+
+# Add an edge
+AddEdge h n n1 eZ
+AddEdge h n n1 eA
+AddEdge h n n3 e3
+AddEdge h n n2 eA
+AddEdge h n n2 eJ
+AddEdge h n n2 eZ
+
+# Print the nodes in the graph and the outgoing edges from n
+ListChildren h n

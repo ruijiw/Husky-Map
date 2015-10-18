@@ -1,0 +1,24 @@
+# Specification testing file.
+# Tests that multiple graphs can be created
+
+
+# Create the first graph
+CreateGraph graph1
+
+# Create the second graph
+CreateGraph graph2
+
+# Create the third graph
+CreateGraph graph3
+
+# Create the 4th graph
+CreateGraph graph4
+
+# Create the 5th graph
+CreateGraph graph5
+
+# Create the 6th graph
+CreateGraph graph6
+
+# Create the 7th graph
+CreateGraph graph7

@@ -1,0 +1,11 @@
+#Test whether AddEdges and ListChildren command works correctly
+
+created graph test
+added node A to test
+added node C to test
+added node B to test
+
+added edge 0.550 from A to C in test
+added edge 0.101 from A to C in test
+
+the children of A in test are: C(0.101) C(0.550)

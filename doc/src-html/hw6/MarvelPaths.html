@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<title>Source code</title>
+<link rel="stylesheet" type="text/css" href="../../stylesheet.css" title="Style">
+</head>
+<body>
+<div class="sourceContainer">
+<pre><span class="sourceLineNo">001</span>package hw6;<a name="line.1"></a>
+<span class="sourceLineNo">002</span><a name="line.2"></a>
+<span class="sourceLineNo">003</span><a name="line.3"></a>
+<span class="sourceLineNo">004</span>import java.util.*;<a name="line.4"></a>
+<span class="sourceLineNo">005</span><a name="line.5"></a>
+<span class="sourceLineNo">006</span>import hw5.*;<a name="line.6"></a>
+<span class="sourceLineNo">007</span>import hw6.MarvelParser;<a name="line.7"></a>
+<span class="sourceLineNo">008</span>import hw6.MarvelParser.MalformedDataException;<a name="line.8"></a>
+<span class="sourceLineNo">009</span><a name="line.9"></a>
+<span class="sourceLineNo">010</span>/**<a name="line.10"></a>
+<span class="sourceLineNo">011</span> * This class contains a method to load graph from tsv files and a method to <a name="line.11"></a>
+<span class="sourceLineNo">012</span> * find the shortest path from a specified start node to a specified dest node. <a name="line.12"></a>
+<span class="sourceLineNo">013</span> * The path found is the lexicographically (alphabetically) least path.<a name="line.13"></a>
+<span class="sourceLineNo">014</span> */<a name="line.14"></a>
+<span class="sourceLineNo">015</span>public class MarvelPaths {<a name="line.15"></a>
+<span class="sourceLineNo">016</span>        <a name="line.16"></a>
+<span class="sourceLineNo">017</span>        /**<a name="line.17"></a>
+<span class="sourceLineNo">018</span>         * Reads a user's input to determine the file name to load, the start node<a name="line.18"></a>
+<span class="sourceLineNo">019</span>         * and the dest node of the path to find.<a name="line.19"></a>
+<span class="sourceLineNo">020</span>         * <a name="line.20"></a>
+<span class="sourceLineNo">021</span>         * @throws MalformedDataException if the file is not well-formed:<a name="line.21"></a>
+<span class="sourceLineNo">022</span>         * each line contains exactly two tokens separated by a tab,<a name="line.22"></a>
+<span class="sourceLineNo">023</span>     * or else starting with a # symbol to indicate a comment line.<a name="line.23"></a>
+<span class="sourceLineNo">024</span>         */<a name="line.24"></a>
+<span class="sourceLineNo">025</span>        public static void main(String[] args) throws MalformedDataException { <a name="line.25"></a>
+<span class="sourceLineNo">026</span>                Scanner console = new Scanner(System.in);<a name="line.26"></a>
+<span class="sourceLineNo">027</span>                // read the start node and dest node from client<a name="line.27"></a>
+<span class="sourceLineNo">028</span>                Graph&lt;String, String&gt; marvelGraph = loadGraph("src/hw6/data/marvel.tsv");<a name="line.28"></a>
+<span class="sourceLineNo">029</span>                System.out.println("Start character: ");<a name="line.29"></a>
+<span class="sourceLineNo">030</span>                String start = console.nextLine(); <a name="line.30"></a>
+<span class="sourceLineNo">031</span>                System.out.println("Dest character: ");<a name="line.31"></a>
+<span class="sourceLineNo">032</span>                String dest = console.nextLine();<a name="line.32"></a>
+<span class="sourceLineNo">033</span>                List&lt;Edge&lt;String, String&gt;&gt; edges = findPath(start, dest, marvelGraph);<a name="line.33"></a>
+<span class="sourceLineNo">034</span>                if (!marvelGraph.containNode(new Node&lt;String&gt;(start)) || !marvelGraph.containNode(new Node&lt;String&gt;(dest))){<a name="line.34"></a>
+<span class="sourceLineNo">035</span>                        if (!marvelGraph.containNode(new Node&lt;String&gt;(start))) {<a name="line.35"></a>
+<span class="sourceLineNo">036</span>                                System.out.println("unknown character " + start);<a name="line.36"></a>
+<span class="sourceLineNo">037</span>                        }<a name="line.37"></a>
+<span class="sourceLineNo">038</span>                        if (!marvelGraph.containNode(new Node&lt;String&gt;(dest))) {<a name="line.38"></a>
+<span class="sourceLineNo">039</span>                                System.out.println("unknown character " + dest);<a name="line.39"></a>
+<span class="sourceLineNo">040</span>                        }<a name="line.40"></a>
+<span class="sourceLineNo">041</span>                } else {<a name="line.41"></a>
+<span class="sourceLineNo">042</span>                        if (edges.isEmpty() &amp;&amp; !start.equals(dest)) {<a name="line.42"></a>
+<span class="sourceLineNo">043</span>                                System.out.println("path from " + start + " to " + dest + ":");<a name="line.43"></a>
+<span class="sourceLineNo">044</span>                                System.out.println("no path found");<a name="line.44"></a>
+<span class="sourceLineNo">045</span>                        } else if (!start.equals(dest)){<a name="line.45"></a>
+<span class="sourceLineNo">046</span>                                // print out the path<a name="line.46"></a>
+<span class="sourceLineNo">047</span>                                for (Edge&lt;String, String&gt; edge: edges) {<a name="line.47"></a>
+<span class="sourceLineNo">048</span>                                        System.out.println(edge.getParent().getData() + " to " + edge.getChildren().getData() <a name="line.48"></a>
+<span class="sourceLineNo">049</span>                                                + " via " + edge.getLabel());<a name="line.49"></a>
+<span class="sourceLineNo">050</span>                                }<a name="line.50"></a>
+<span class="sourceLineNo">051</span>                        }<a name="line.51"></a>
+<span class="sourceLineNo">052</span>                }<a name="line.52"></a>
+<span class="sourceLineNo">053</span>                console.close();<a name="line.53"></a>
+<span class="sourceLineNo">054</span>        }<a name="line.54"></a>
+<span class="sourceLineNo">055</span>        <a name="line.55"></a>
+<span class="sourceLineNo">056</span>        /**<a name="line.56"></a>
+<span class="sourceLineNo">057</span>         * Returns a graph that loads the data in a specified file<a name="line.57"></a>
+<span class="sourceLineNo">058</span>         * <a name="line.58"></a>
+<span class="sourceLineNo">059</span>         * @requires fileName is a valid file path<a name="line.59"></a>
+<span class="sourceLineNo">060</span>         * @param fileName the file that will be loaded<a name="line.60"></a>
+<span class="sourceLineNo">061</span>         * @return a Graph that loads nodes and edges in a specified file<a name="line.61"></a>
+<span class="sourceLineNo">062</span>         * @throws MalformedDataException if the file is not well-formed:<a name="line.62"></a>
+<span class="sourceLineNo">063</span>         * each line contains exactly two tokens separated by a tab,<a name="line.63"></a>
+<span class="sourceLineNo">064</span>     * or else starting with a # symbol to indicate a comment line.<a name="line.64"></a>
+<span class="sourceLineNo">065</span>         */<a name="line.65"></a>
+<span class="sourceLineNo">066</span>        public static Graph&lt;String, String&gt; loadGraph(String fileName) throws MalformedDataException {<a name="line.66"></a>
+<span class="sourceLineNo">067</span>                // get data from the file<a name="line.67"></a>
+<span class="sourceLineNo">068</span>                Set&lt;String&gt; characters = new HashSet&lt;String&gt;();<a name="line.68"></a>
+<span class="sourceLineNo">069</span>                Map&lt;String, List&lt;String&gt;&gt; books = new HashMap&lt;String, List&lt;String&gt;&gt;();<a name="line.69"></a>
+<span class="sourceLineNo">070</span>                MarvelParser.parseData(fileName, characters, books);<a name="line.70"></a>
+<span class="sourceLineNo">071</span>                // add all characters to the graph<a name="line.71"></a>
+<span class="sourceLineNo">072</span>                Graph&lt;String, String&gt; marvelGraph = new Graph&lt;String, String&gt;();<a name="line.72"></a>
+<span class="sourceLineNo">073</span>                for (String name: characters) {<a name="line.73"></a>
+<span class="sourceLineNo">074</span>                        marvelGraph.addNode(new Node&lt;String&gt;(name));<a name="line.74"></a>
+<span class="sourceLineNo">075</span>                }<a name="line.75"></a>
+<span class="sourceLineNo">076</span>                Set&lt;String&gt; labels = books.keySet();<a name="line.76"></a>
+<span class="sourceLineNo">077</span>                // add all relationships that two chars in the same book to the graph<a name="line.77"></a>
+<span class="sourceLineNo">078</span>                for (String label: labels) {<a name="line.78"></a>
+<span class="sourceLineNo">079</span>                        List&lt;String&gt; edges = books.get(label);<a name="line.79"></a>
+<span class="sourceLineNo">080</span>                        for (String parent: edges) {<a name="line.80"></a>
+<span class="sourceLineNo">081</span>                                for (String children: edges) {<a name="line.81"></a>
+<span class="sourceLineNo">082</span>                                        if (!parent.equals(children)) {<a name="line.82"></a>
+<span class="sourceLineNo">083</span>                                                marvelGraph.addEdge(new Edge&lt;String, String&gt;(label, new Node&lt;String&gt;(parent), new Node&lt;String&gt;(children)));<a name="line.83"></a>
+<span class="sourceLineNo">084</span>                                        }<a name="line.84"></a>
+<span class="sourceLineNo">085</span>                                }<a name="line.85"></a>
+<span class="sourceLineNo">086</span>                        }<a name="line.86"></a>
+<span class="sourceLineNo">087</span>                }<a name="line.87"></a>
+<span class="sourceLineNo">088</span>                return marvelGraph;<a name="line.88"></a>
+<span class="sourceLineNo">089</span>        }<a name="line.89"></a>
+<span class="sourceLineNo">090</span>        <a name="line.90"></a>
+<span class="sourceLineNo">091</span>        /**<a name="line.91"></a>
+<span class="sourceLineNo">092</span>         * Find a path between specified start node and dest node and return the path<a name="line.92"></a>
+<span class="sourceLineNo">093</span>         * <a name="line.93"></a>
+<span class="sourceLineNo">094</span>         * @requires marvelGraph cannot be null<a name="line.94"></a>
+<span class="sourceLineNo">095</span>         * @param s the start node of the path<a name="line.95"></a>
+<span class="sourceLineNo">096</span>         * @param d the dest node of the path<a name="line.96"></a>
+<span class="sourceLineNo">097</span>         * @param marvelGraph the graph being searched<a name="line.97"></a>
+<span class="sourceLineNo">098</span>         * @return a list of edges that indicate the shortest path from start node to dest node<a name="line.98"></a>
+<span class="sourceLineNo">099</span>         * returns an empty list if start or dest node is not is the specified graph <a name="line.99"></a>
+<span class="sourceLineNo">100</span>         * returns an empty list if the path from start node to dest node is not found<a name="line.100"></a>
+<span class="sourceLineNo">101</span>         */<a name="line.101"></a>
+<span class="sourceLineNo">102</span>        public static List&lt;Edge&lt;String, String&gt;&gt; findPath(String s, String d, Graph&lt;String, String&gt; marvelGraph) {<a name="line.102"></a>
+<span class="sourceLineNo">103</span>                Node&lt;String&gt; start = new Node&lt;String&gt;(s);<a name="line.103"></a>
+<span class="sourceLineNo">104</span>                Node&lt;String&gt; dest = new Node&lt;String&gt;(d);<a name="line.104"></a>
+<span class="sourceLineNo">105</span>                List&lt;Edge&lt;String, String&gt;&gt; path = new ArrayList&lt;Edge&lt;String, String&gt;&gt;();<a name="line.105"></a>
+<span class="sourceLineNo">106</span>                // return an empty list if marvelGraph doesn't contain start or dest node<a name="line.106"></a>
+<span class="sourceLineNo">107</span>                if (!marvelGraph.containNode(start) || !marvelGraph.containNode(dest)) {<a name="line.107"></a>
+<span class="sourceLineNo">108</span>                        return path;<a name="line.108"></a>
+<span class="sourceLineNo">109</span>                }<a name="line.109"></a>
+<span class="sourceLineNo">110</span>                Queue&lt;Node&lt;String&gt;&gt; worklist = new LinkedList&lt;Node&lt;String&gt;&gt;();<a name="line.110"></a>
+<span class="sourceLineNo">111</span>                Map&lt;Node&lt;String&gt;, List&lt;Edge&lt;String, String&gt;&gt;&gt; nodeToPath = new HashMap&lt;Node&lt;String&gt;, List&lt;Edge&lt;String, String&gt;&gt;&gt;();<a name="line.111"></a>
+<span class="sourceLineNo">112</span>                worklist.add(start);<a name="line.112"></a>
+<span class="sourceLineNo">113</span>                nodeToPath.put(start, new ArrayList&lt;Edge&lt;String, String&gt;&gt;());<a name="line.113"></a>
+<span class="sourceLineNo">114</span>                while (!worklist.isEmpty()) {<a name="line.114"></a>
+<span class="sourceLineNo">115</span>                        Node&lt;String&gt; next = worklist.remove();<a name="line.115"></a>
+<span class="sourceLineNo">116</span>                        // if next node is the expected dest node, return the current path<a name="line.116"></a>
+<span class="sourceLineNo">117</span>                        if (next.equals(dest)) {<a name="line.117"></a>
+<span class="sourceLineNo">118</span>                                return nodeToPath.get(next);<a name="line.118"></a>
+<span class="sourceLineNo">119</span>                        }<a name="line.119"></a>
+<span class="sourceLineNo">120</span>                        Set&lt;Edge&lt;String, String&gt;&gt; edges = new TreeSet&lt;Edge&lt;String, String&gt;&gt;(marvelGraph.getEdgeSet(next));<a name="line.120"></a>
+<span class="sourceLineNo">121</span>                        for (Edge&lt;String, String&gt; edge: edges) {<a name="line.121"></a>
+<span class="sourceLineNo">122</span>                                Node&lt;String&gt; destNode = edge.getChildren();<a name="line.122"></a>
+<span class="sourceLineNo">123</span>                                // append edge to the previous path<a name="line.123"></a>
+<span class="sourceLineNo">124</span>                                if (!nodeToPath.containsKey(destNode)) {<a name="line.124"></a>
+<span class="sourceLineNo">125</span>                                        List&lt;Edge&lt;String, String&gt;&gt; destPath = new ArrayList&lt;Edge&lt;String, String&gt;&gt;(nodeToPath.get(next));<a name="line.125"></a>
+<span class="sourceLineNo">126</span>                                        destPath.add(edge);<a name="line.126"></a>
+<span class="sourceLineNo">127</span>                                        nodeToPath.put(destNode, destPath);<a name="line.127"></a>
+<span class="sourceLineNo">128</span>                                        worklist.add(destNode);<a name="line.128"></a>
+<span class="sourceLineNo">129</span>                                }<a name="line.129"></a>
+<span class="sourceLineNo">130</span>                        }<a name="line.130"></a>
+<span class="sourceLineNo">131</span>                }<a name="line.131"></a>
+<span class="sourceLineNo">132</span>                return path;<a name="line.132"></a>
+<span class="sourceLineNo">133</span>        }<a name="line.133"></a>
+<span class="sourceLineNo">134</span>}<a name="line.134"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</div>
+</body>
+</html>

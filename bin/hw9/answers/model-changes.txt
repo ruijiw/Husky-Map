@@ -1,0 +1,1 @@
+1. change the process of obtaining the direction from in view to in model

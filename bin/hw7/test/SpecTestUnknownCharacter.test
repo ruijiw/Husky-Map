@@ -1,0 +1,12 @@
+# Find a path using the LOLDictionary dataSet.
+# This test uses the parser, the MarvelPaths2's setUpGraph
+# and Dijkstra algorithm and applies to a targeted dataSet.
+# This test is for the unknown characters case.
+
+LoadGraph dictionary LOLDictionary.tsv
+
+FindPath dictionary TEEMO UNKNOWN
+
+FindPath dictionary UNKNOWN JINX
+
+FindPath dictionary UNKNOWN_A UNKNOWN_B

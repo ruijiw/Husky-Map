@@ -1,0 +1,16 @@
+# Find a path using the LOLDictionary dataSet.
+# This test uses both the parser and BFS algorithm in the MarvelPaths
+# class and applies to a targeted dataset. This test is for one
+# character have 3 hop("edge") path to another character.
+
+loaded graph dictionary
+
+path from VI to SONA:
+VI to TEEMO via JUNGLE
+TEEMO to JINX via ADC
+JINX to SONA via FRIENDS
+
+path from SONA to AHRI:
+SONA to JINX via FRIENDS
+JINX to TEEMO via ADC
+TEEMO to AHRI via MID

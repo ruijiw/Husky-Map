@@ -1,0 +1,11 @@
+Ruijia Wang
+
+1. The code throws an exception if n <= 0. However, it should throw an exception only 
+when n is negative. 0 is nonnegative, so it should not throw an exception. 
+I change n <= 0 to n < 0.
+2. The code throws an exception when n = 0. However, it should return 1 as base case.
+I change n <= 0 to n < 0.
+3. The code return 1 when n = 2. However, it should return the sum of the first two elements.
+Also, the code calculates the difference between the previous two terms not the sum of the previous 
+two terms. I change n <= 2 to n < 2 and getFibTerm(n - 1) - getFibTerm(n - 2) to 
+getFibTerm(n - 1) + getFibTerm(n - 2).

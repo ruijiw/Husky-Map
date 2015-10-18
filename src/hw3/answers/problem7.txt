@@ -1,0 +1,13 @@
+Ruijia Wang
+
+1. The code does not set its private field volume with the parameter volume when constructing the object.
+I change volume = volume to this.volume = volume. Also, the code does not return the volume of the ball 
+in its getVolume method. I change return 0 to return volume.
+2. The second approach is better because it avoids computing the total volume when the method is called
+ constantly.
+3. Method 1: Put all the balls in the box into an ArrayList
+             Create a comparator in the class to compare volumes of balls.
+             Sort the ArrayList by the comparator and return the iterator of the ArrayList.
+   Method 2: sort the box when every time adding a ball into the box
+   			 return the iterator of the box directly
+4. The second one is the most efficient. Because it's O(nlogn) for method 1 and O(1) for method 2.

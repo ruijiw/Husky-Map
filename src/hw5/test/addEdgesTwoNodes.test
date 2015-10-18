@@ -1,0 +1,24 @@
+# Specification testing file.
+# Tests that a graph can be created, a pair of nodes and
+# multiple of edges between them can be added, and multiple
+# edges can be printed out.
+
+
+# Create a graph
+CreateGraph graph1
+
+# Add a pair of nodes
+AddNode graph1 n1
+AddNode graph1 n2
+
+# Add multiple edges
+AddEdge graph1 n1 n2 e1
+AddEdge graph1 n1 n2 e2
+AddEdge graph1 n1 n2 e3
+AddEdge graph1 n1 n2 e4
+AddEdge graph1 n1 n2 e5
+AddEdge graph1 n1 n2 e6
+AddEdge graph1 n1 n2 e7
+
+# Print the outgoing edges from n1
+ListChildren graph1 n1

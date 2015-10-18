@@ -1,0 +1,10 @@
+# Find a path using the LOLDictionary dataSet.
+# This test uses both the parser and BFS algorithm in the MarvelPaths
+# class and applies to a targeted dataset. This test is for the
+# user asks for the character to itself case.
+
+LoadGraph dictionary LOLDictionary.tsv
+
+FindPath dictionary TEEMO TEEMO
+
+FindPath dictionary JINX JINX

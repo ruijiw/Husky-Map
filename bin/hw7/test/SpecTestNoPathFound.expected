@@ -1,0 +1,13 @@
+# Find a path using the LOLDictionary dataSet.
+# This test uses the parser, the MarvelPaths2's setUpGraph
+# and Dijkstra algorithm and applies to a targeted dataSet.
+# This test is for one character does not have the path to
+# another character.
+
+loaded graph dictionary
+
+path from RIVEN to MORGANA:
+no path found
+
+path from MORGANA to KATARINA:
+no path found

@@ -1,0 +1,28 @@
+1.  I include calls to checkRep at the end of constructors because only constructors in the class can actually
+	modifies the fields of RatTerm: the fields are private final. The other methods would return a newly 
+	created RatTerm that rep inv will be checked while constructing.
+
+2.	The constructors would be less complex because would be less complex because they don't need to check 
+	whether the zero coefficient have a zero exponent. The code about checking zero can be eliminated. 
+	
+	checkRep() would be less complex because it doesn't need to check whether the zero coefficient have 
+	a zero exponent. 
+ 	
+ 	add() would be more complex. If it's not modified, it would throw exception if a zero RatTerm with 
+ 	different exponents passed in the method (they actually can be added). Thus, zero RatTerm would be
+ 	a special case that should be added.
+ 	
+ 	equals() would be more complex because two zero RatTerm with different exponents should be equal. 
+ 	The special case should be added in the method.
+ 	
+ 	toString() would be more complex because a zero RatTerm should be always be represented as string "0" 
+ 	without any exponent representations. Thus, a special case should be added in the method.
+ 	
+3.	The constructor would be more complex. A special case should be added if the passed-in coefficient is 
+	a NaN so that the exponent of it could be set to zero. Other methods don't need to be changed because 
+	they cannot actually modify a RatTerm that has already been checked while constructing. 
+ 	
+ 	I prefer the coeff.equals (RatNum.ZERO) ==> expt = 0 because the rep inv can prevent some inconsistencies
+ 	involving zero. The exponent of NaN doesn't need to be equal to zero because it would not cause any 
+ 	inconsistencies. If do so, constructors would be more complex because additional special case should 
+ 	be added.

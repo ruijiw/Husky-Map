@@ -1,0 +1,16 @@
+# Find a path using the LOLDictionary dataSet.
+# This test uses the parser, the MarvelPaths2's setUpGraph
+# and Dijkstra algorithm and applies to a targeted dataSet.
+# This test is for find path after the client adding additional edge.
+
+LoadGraph dictionary LOLDictionary.tsv
+
+AddEdge dictionary TEEMO LEBLANC 0.5
+
+FindPath dictionary TEEMO LEBLANC
+
+AddEdge dictionary TEEMO CATLYN 0.5
+
+AddEdge dictionary CATLYN JINX 0.3
+
+FindPath dictionary TEEMO JINX

@@ -1,0 +1,10 @@
+The strategy of most of my tests are clear-box because I modify the test suites a lot after checking the actual source code. 
+I start the test from the black box test, but I add lots of edge cases or special situations afterwards. 
+
+My implementation test is mostly unit. I test the behavior of each method separately with different cases. For edge cases,
+I test the behavior of Nodes and Edges with empty Strings, very long Strings and Strings with space, Strings with integer, 
+Strings with double are tested. For special situation, I test the situation that adding an edge whose children node or parent 
+node or both is not in the graph. I test adding duplicate edges and nodes and the edges with the same nodes but different label.
+
+My specification test builds up from unit test and gradually leads to system test. The tests are creating graphs only,
+adding nodes only, adding edges between two nodes, adding multiple edges, and creating multiple graphs. 

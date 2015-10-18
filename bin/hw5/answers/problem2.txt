@@ -1,0 +1,47 @@
+
+ Node represents a vertex in one Graph. 
+ Edge represents a connection between two Nodes. It has one parent node, one children node and a label. 
+ Graph represents a collection of nodes and edges. Graph can be described by a map with nodes as keys 
+ and lists of edges as values. A node matches to an edge if the edge contains the node as parent node. 
+
+ Graph is a single class because only Graph would implement an interface if there is one. It's unnecessary
+ to have an interface.
+ 
+ I included following methods in my design:
+ 	isEmpty() would return whether a graph is empty. 
+ 	A client can use it to view whether the graph contains nodes.
+ 	
+ 	size() return the number of nodes in the graph.
+ 	
+ 	containNode(Node node) takes a Node as its parameter and return whether the Graph contains the specified node
+ 	
+ 	containEdge(Edge edge) takes a Edge as its parameter and return whether the Graph contains the specified edge
+ 	
+ 	addNode(Node node) adds a Node to the graph. A node would not be added if it is already in the graph. 
+ 	A client can use it to modify a graph by adding nodes.
+ 	
+ 	addEdge(Edge edge) adds an Edge to the graph and maps it with its parent node. A edge would not be added 
+ 	if it is already in the graph or it has no corresponding parent node and children node. 
+ 	A client can use it to modify a graph by adding edges.
+ 	
+ 	removeNode(Node node) removes the Node from the Graph. A node would not be removed if it is not in the graph. 
+ 	A client can use it to modify a graph by removing nodes.
+ 		
+ 	removeEdge(Edge edge) removes an edge from the Graph. An edge would not be removed if it is not in the graph. 
+ 	A client can use it to modify a graph by removing edges.
+ 	
+ 	getNodeSet() returns a set containing all the Nodes in the graph. 
+ 	A client can view the node set but not modify it.
+ 	
+ 	getModifiableNodeSet() returns a set containing all the Nodes in the graph. 
+ 	A client can view the node set and modify it.
+ 	
+ 	getEdgeSet(Node node) returns a set containing edges with the specified node as parent node.
+ 	A client can view the edge set but not modify it.
+ 	
+ 	getModifiableEdgeSet(Node node) returns a set containing edges with the specified node as parent node.
+ 	A client can view the edge set and modify it.
+ 		
+ 	getEdgeSets() returns a set containing all the Edges in the graph. 
+ 	A client can view the edge set but not modify it.
+ 	

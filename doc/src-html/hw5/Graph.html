@@ -1,0 +1,322 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<title>Source code</title>
+<link rel="stylesheet" type="text/css" href="../../stylesheet.css" title="Style">
+</head>
+<body>
+<div class="sourceContainer">
+<pre><span class="sourceLineNo">001</span>package hw5;<a name="line.1"></a>
+<span class="sourceLineNo">002</span><a name="line.2"></a>
+<span class="sourceLineNo">003</span>import java.util.*;<a name="line.3"></a>
+<span class="sourceLineNo">004</span><a name="line.4"></a>
+<span class="sourceLineNo">005</span>/**&lt;b&gt;Graph&lt;b&gt; represents an &lt;b&gt; mutable &lt;/b&gt; collection of nodes and edges.<a name="line.5"></a>
+<span class="sourceLineNo">006</span> * &lt;p&gt;<a name="line.6"></a>
+<span class="sourceLineNo">007</span> * Each Graph is a map with nodes as keys and Sets of edges as values. <a name="line.7"></a>
+<span class="sourceLineNo">008</span> * Each edge connects two nodes: a parent node which is the node the edge starts from <a name="line.8"></a>
+<span class="sourceLineNo">009</span> * and a children which is the node the edge ends with. <a name="line.9"></a>
+<span class="sourceLineNo">010</span> * &lt;p&gt;<a name="line.10"></a>
+<span class="sourceLineNo">011</span> */<a name="line.11"></a>
+<span class="sourceLineNo">012</span><a name="line.12"></a>
+<span class="sourceLineNo">013</span>public class Graph&lt;N extends Comparable&lt;N&gt;, E extends Comparable&lt;E&gt;&gt; {<a name="line.13"></a>
+<span class="sourceLineNo">014</span>        private final Map&lt;Node&lt;N&gt;, Set&lt;Edge&lt;N, E&gt;&gt;&gt; graph;<a name="line.14"></a>
+<span class="sourceLineNo">015</span>        public static final boolean DEBUG_FLAG = false;<a name="line.15"></a>
+<span class="sourceLineNo">016</span>        <a name="line.16"></a>
+<span class="sourceLineNo">017</span>        // Abstraction Function:<a name="line.17"></a>
+<span class="sourceLineNo">018</span>        // Each key of a Graph is mapped to the corresponding node of graph.<a name="line.18"></a>
+<span class="sourceLineNo">019</span>        // Each value of a Graph is mapped to corresponding set of edges of graph.<a name="line.19"></a>
+<span class="sourceLineNo">020</span>        <a name="line.20"></a>
+<span class="sourceLineNo">021</span>        // Representation Invariant:<a name="line.21"></a>
+<span class="sourceLineNo">022</span>        // graph != null &amp;&amp;<a name="line.22"></a>
+<span class="sourceLineNo">023</span>        // all keys of graph != null &amp;&amp;<a name="line.23"></a>
+<span class="sourceLineNo">024</span>        // all values of graph != null<a name="line.24"></a>
+<span class="sourceLineNo">025</span>        <a name="line.25"></a>
+<span class="sourceLineNo">026</span>        /**<a name="line.26"></a>
+<span class="sourceLineNo">027</span>         * @effects constructs a new Graph with no node<a name="line.27"></a>
+<span class="sourceLineNo">028</span>         */<a name="line.28"></a>
+<span class="sourceLineNo">029</span>        public Graph() {<a name="line.29"></a>
+<span class="sourceLineNo">030</span>                this.graph = new HashMap&lt;Node&lt;N&gt;, Set&lt;Edge&lt;N, E&gt;&gt;&gt;();<a name="line.30"></a>
+<span class="sourceLineNo">031</span>                checkRep();<a name="line.31"></a>
+<span class="sourceLineNo">032</span>        }<a name="line.32"></a>
+<span class="sourceLineNo">033</span><a name="line.33"></a>
+<span class="sourceLineNo">034</span>        /**<a name="line.34"></a>
+<span class="sourceLineNo">035</span>         * Returns whether this Graph is empty.<a name="line.35"></a>
+<span class="sourceLineNo">036</span>         * @return true if this Graph is empty and <a name="line.36"></a>
+<span class="sourceLineNo">037</span>         * false if this Graph is not empty.<a name="line.37"></a>
+<span class="sourceLineNo">038</span>         */<a name="line.38"></a>
+<span class="sourceLineNo">039</span>        public boolean isEmpty() {<a name="line.39"></a>
+<span class="sourceLineNo">040</span>                return this.graph.isEmpty();<a name="line.40"></a>
+<span class="sourceLineNo">041</span>        }<a name="line.41"></a>
+<span class="sourceLineNo">042</span>        <a name="line.42"></a>
+<span class="sourceLineNo">043</span>        /**<a name="line.43"></a>
+<span class="sourceLineNo">044</span>         * Returns the number of Nodes in this Graph.<a name="line.44"></a>
+<span class="sourceLineNo">045</span>         * @return the size of this map.<a name="line.45"></a>
+<span class="sourceLineNo">046</span>         */<a name="line.46"></a>
+<span class="sourceLineNo">047</span>        public int size() {<a name="line.47"></a>
+<span class="sourceLineNo">048</span>                return this.graph.size();<a name="line.48"></a>
+<span class="sourceLineNo">049</span>        }<a name="line.49"></a>
+<span class="sourceLineNo">050</span>        <a name="line.50"></a>
+<span class="sourceLineNo">051</span>        /**<a name="line.51"></a>
+<span class="sourceLineNo">052</span>         * Returns whether the specified node is in this Graph. <a name="line.52"></a>
+<span class="sourceLineNo">053</span>         * @param node, the Node to check whether it is in this Graph<a name="line.53"></a>
+<span class="sourceLineNo">054</span>         * @requires test node cannot be null<a name="line.54"></a>
+<span class="sourceLineNo">055</span>         * @return true if the specified node is in this Graph,<a name="line.55"></a>
+<span class="sourceLineNo">056</span>         * false if the specified node is not in this Graph.<a name="line.56"></a>
+<span class="sourceLineNo">057</span>         */<a name="line.57"></a>
+<span class="sourceLineNo">058</span>        public boolean containNode(Node&lt;N&gt; node) {<a name="line.58"></a>
+<span class="sourceLineNo">059</span>                return graph.containsKey(node);<a name="line.59"></a>
+<span class="sourceLineNo">060</span>        }<a name="line.60"></a>
+<span class="sourceLineNo">061</span>        <a name="line.61"></a>
+<span class="sourceLineNo">062</span>        /**<a name="line.62"></a>
+<span class="sourceLineNo">063</span>         * Returns whether the specified edge is in this Graph.<a name="line.63"></a>
+<span class="sourceLineNo">064</span>         * @param edge, the edge to check whether it is in this graph.<a name="line.64"></a>
+<span class="sourceLineNo">065</span>         * @requires test edge cannot be null<a name="line.65"></a>
+<span class="sourceLineNo">066</span>         * @return true if the specified edge is in this Graph,<a name="line.66"></a>
+<span class="sourceLineNo">067</span>         * false if the specified edge is not in this Graph.<a name="line.67"></a>
+<span class="sourceLineNo">068</span>         */<a name="line.68"></a>
+<span class="sourceLineNo">069</span>        public boolean containEdge(Edge&lt;N, E&gt; edge) {<a name="line.69"></a>
+<span class="sourceLineNo">070</span>                if (!graph.containsKey(edge.getParent())) {<a name="line.70"></a>
+<span class="sourceLineNo">071</span>                        return false;<a name="line.71"></a>
+<span class="sourceLineNo">072</span>                } <a name="line.72"></a>
+<span class="sourceLineNo">073</span>                Set&lt;Edge&lt;N, E&gt;&gt; edgeSet = graph.get(edge.getParent());<a name="line.73"></a>
+<span class="sourceLineNo">074</span>                return edgeSet.contains(edge);<a name="line.74"></a>
+<span class="sourceLineNo">075</span>        }<a name="line.75"></a>
+<span class="sourceLineNo">076</span>        <a name="line.76"></a>
+<span class="sourceLineNo">077</span>        /**<a name="line.77"></a>
+<span class="sourceLineNo">078</span>         * Adds the specified Node to this Graph<a name="line.78"></a>
+<span class="sourceLineNo">079</span>         * Returns whether the specified Node is added to this Graph<a name="line.79"></a>
+<span class="sourceLineNo">080</span>         * @param node, the specified Node to add to this Graph<a name="line.80"></a>
+<span class="sourceLineNo">081</span>         * @requires added node cannot be null<a name="line.81"></a>
+<span class="sourceLineNo">082</span>         * @modifies this <a name="line.82"></a>
+<span class="sourceLineNo">083</span>         * @effects this graph contains an additional node as key if the input node is <a name="line.83"></a>
+<span class="sourceLineNo">084</span>         * not in the graph before<a name="line.84"></a>
+<span class="sourceLineNo">085</span>         * @return true if the specified Node is successfully added to this graph<a name="line.85"></a>
+<span class="sourceLineNo">086</span>         * false if the specified Node is not added to this Graph<a name="line.86"></a>
+<span class="sourceLineNo">087</span>         */<a name="line.87"></a>
+<span class="sourceLineNo">088</span>        public boolean addNode(Node&lt;N&gt; node) {<a name="line.88"></a>
+<span class="sourceLineNo">089</span>                if (!this.containNode(node)) { <a name="line.89"></a>
+<span class="sourceLineNo">090</span>                        graph.put(node, new HashSet&lt;Edge&lt;N, E&gt;&gt;());<a name="line.90"></a>
+<span class="sourceLineNo">091</span>                        checkRep();<a name="line.91"></a>
+<span class="sourceLineNo">092</span>                        return true;<a name="line.92"></a>
+<span class="sourceLineNo">093</span>                }<a name="line.93"></a>
+<span class="sourceLineNo">094</span>                return false;<a name="line.94"></a>
+<span class="sourceLineNo">095</span>        }<a name="line.95"></a>
+<span class="sourceLineNo">096</span>        <a name="line.96"></a>
+<span class="sourceLineNo">097</span>        <a name="line.97"></a>
+<span class="sourceLineNo">098</span>        <a name="line.98"></a>
+<span class="sourceLineNo">099</span>        /**<a name="line.99"></a>
+<span class="sourceLineNo">100</span>         * Adds the specified Edge to this Graph<a name="line.100"></a>
+<span class="sourceLineNo">101</span>         * Returns whether the specified Edge is added to this Graph<a name="line.101"></a>
+<span class="sourceLineNo">102</span>         * @param edge, the specified Edge to add to this Graph<a name="line.102"></a>
+<span class="sourceLineNo">103</span>         * @requires added edge cannot be null<a name="line.103"></a>
+<span class="sourceLineNo">104</span>         * @modifies this <a name="line.104"></a>
+<span class="sourceLineNo">105</span>         * @effects this graph contains an additional Edge object. The specified Edge<a name="line.105"></a>
+<span class="sourceLineNo">106</span>         * would be mapped to the key that is the parent Node of the Edge.<a name="line.106"></a>
+<span class="sourceLineNo">107</span>         * @return true if the specified Edge is successfully added to this Graph<a name="line.107"></a>
+<span class="sourceLineNo">108</span>         * false if the specified Edge is not added to this Graph<a name="line.108"></a>
+<span class="sourceLineNo">109</span>         */<a name="line.109"></a>
+<span class="sourceLineNo">110</span>        public boolean addEdge(Edge&lt;N, E&gt; edge) {<a name="line.110"></a>
+<span class="sourceLineNo">111</span>                if (!graph.containsKey(edge.getParent()) || !graph.containsKey(edge.getChildren())) {<a name="line.111"></a>
+<span class="sourceLineNo">112</span>                        return false;<a name="line.112"></a>
+<span class="sourceLineNo">113</span>                }<a name="line.113"></a>
+<span class="sourceLineNo">114</span>                Set&lt;Edge&lt;N, E&gt;&gt; edgeSet = graph.get(edge.getParent());<a name="line.114"></a>
+<span class="sourceLineNo">115</span>                boolean success = edgeSet.add(edge);<a name="line.115"></a>
+<span class="sourceLineNo">116</span>                checkRep();<a name="line.116"></a>
+<span class="sourceLineNo">117</span>                return success;<a name="line.117"></a>
+<span class="sourceLineNo">118</span>        }<a name="line.118"></a>
+<span class="sourceLineNo">119</span>        <a name="line.119"></a>
+<span class="sourceLineNo">120</span>        /**<a name="line.120"></a>
+<span class="sourceLineNo">121</span>         * Removes the specified Node from this Graph<a name="line.121"></a>
+<span class="sourceLineNo">122</span>         * Returns whether the specified Node is removed from this Graph<a name="line.122"></a>
+<span class="sourceLineNo">123</span>         * @param node: the specified Node to remove from this Graph<a name="line.123"></a>
+<span class="sourceLineNo">124</span>         * @requires the removed node cannot be null<a name="line.124"></a>
+<span class="sourceLineNo">125</span>         * @modifies this<a name="line.125"></a>
+<span class="sourceLineNo">126</span>         * @effects this graph removes a key with a type of Node if the input node is in this Graph<a name="line.126"></a>
+<span class="sourceLineNo">127</span>         * @return true if the specified Node is successfully removed from this Graph<a name="line.127"></a>
+<span class="sourceLineNo">128</span>         * false if the specified Node is not removed from this Graph<a name="line.128"></a>
+<span class="sourceLineNo">129</span>         */<a name="line.129"></a>
+<span class="sourceLineNo">130</span>        public boolean removeNode(Node&lt;N&gt; node) {<a name="line.130"></a>
+<span class="sourceLineNo">131</span>                if (!graph.containsKey(node)) {<a name="line.131"></a>
+<span class="sourceLineNo">132</span>                        return false;<a name="line.132"></a>
+<span class="sourceLineNo">133</span>                }<a name="line.133"></a>
+<span class="sourceLineNo">134</span>                graph.remove(node);<a name="line.134"></a>
+<span class="sourceLineNo">135</span>                Set&lt;Edge&lt;N, E&gt;&gt; set = new HashSet&lt;Edge&lt;N, E&gt;&gt;();<a name="line.135"></a>
+<span class="sourceLineNo">136</span>                for (Set&lt;Edge&lt;N, E&gt;&gt; edgeSet: graph.values()) {<a name="line.136"></a>
+<span class="sourceLineNo">137</span>                        for (Edge&lt;N, E&gt; e: edgeSet) {<a name="line.137"></a>
+<span class="sourceLineNo">138</span>                                if (e.getChildren().equals(node)) {<a name="line.138"></a>
+<span class="sourceLineNo">139</span>                                        set.add(e);<a name="line.139"></a>
+<span class="sourceLineNo">140</span>                                }<a name="line.140"></a>
+<span class="sourceLineNo">141</span>                        }<a name="line.141"></a>
+<span class="sourceLineNo">142</span>                }<a name="line.142"></a>
+<span class="sourceLineNo">143</span>                for (Edge&lt;N, E&gt; e: set) {<a name="line.143"></a>
+<span class="sourceLineNo">144</span>                        graph.get(e.getParent()).remove(e);<a name="line.144"></a>
+<span class="sourceLineNo">145</span>                }<a name="line.145"></a>
+<span class="sourceLineNo">146</span>                checkRep();<a name="line.146"></a>
+<span class="sourceLineNo">147</span>                return true;<a name="line.147"></a>
+<span class="sourceLineNo">148</span>        }<a name="line.148"></a>
+<span class="sourceLineNo">149</span>        <a name="line.149"></a>
+<span class="sourceLineNo">150</span>        /**<a name="line.150"></a>
+<span class="sourceLineNo">151</span>         * Removes the specified Edge from this Graph<a name="line.151"></a>
+<span class="sourceLineNo">152</span>         * Returns whether the specified Edge is removed from this Graph<a name="line.152"></a>
+<span class="sourceLineNo">153</span>         * @param edge, the specified Edge to remove from this Graph<a name="line.153"></a>
+<span class="sourceLineNo">154</span>         * @requires the removed Edge cannot be null<a name="line.154"></a>
+<span class="sourceLineNo">155</span>         * @modifies this<a name="line.155"></a>
+<span class="sourceLineNo">156</span>         * @effects this graph removes a specified Edge object if the input edge is in this Graph<a name="line.156"></a>
+<span class="sourceLineNo">157</span>         * @return true if the specified Edge is successfully removed from this Graph<a name="line.157"></a>
+<span class="sourceLineNo">158</span>         * false if the specified Edge is not removed from this Graph<a name="line.158"></a>
+<span class="sourceLineNo">159</span>         */<a name="line.159"></a>
+<span class="sourceLineNo">160</span>        public boolean removeEdge(Edge&lt;N, E&gt; edge) {<a name="line.160"></a>
+<span class="sourceLineNo">161</span>                if (!graph.containsKey(edge.getParent())) {<a name="line.161"></a>
+<span class="sourceLineNo">162</span>                        return false;<a name="line.162"></a>
+<span class="sourceLineNo">163</span>                } <a name="line.163"></a>
+<span class="sourceLineNo">164</span>                Set&lt;Edge&lt;N, E&gt;&gt; edgeSet = graph.get(edge.getParent());<a name="line.164"></a>
+<span class="sourceLineNo">165</span>                boolean success = edgeSet.remove(edge);<a name="line.165"></a>
+<span class="sourceLineNo">166</span>                checkRep();<a name="line.166"></a>
+<span class="sourceLineNo">167</span>                return success;<a name="line.167"></a>
+<span class="sourceLineNo">168</span>        }<a name="line.168"></a>
+<span class="sourceLineNo">169</span>        <a name="line.169"></a>
+<span class="sourceLineNo">170</span>        /**<a name="line.170"></a>
+<span class="sourceLineNo">171</span>         * Returns a set containing all Node objects in this graph<a name="line.171"></a>
+<span class="sourceLineNo">172</span>         * @return a unmodifiable set of this graph's keys that are Node objects<a name="line.172"></a>
+<span class="sourceLineNo">173</span>         */<a name="line.173"></a>
+<span class="sourceLineNo">174</span>        public Set&lt;Node&lt;N&gt;&gt; getNodeSet () {<a name="line.174"></a>
+<span class="sourceLineNo">175</span>                return Collections.unmodifiableSet(graph.keySet());<a name="line.175"></a>
+<span class="sourceLineNo">176</span>        }<a name="line.176"></a>
+<span class="sourceLineNo">177</span>        <a name="line.177"></a>
+<span class="sourceLineNo">178</span>        /**<a name="line.178"></a>
+<span class="sourceLineNo">179</span>         * Returns a set containing all Node objects in this graph<a name="line.179"></a>
+<span class="sourceLineNo">180</span>         * @return a modifiable set of this graph's keys that are Node objects<a name="line.180"></a>
+<span class="sourceLineNo">181</span>         */<a name="line.181"></a>
+<span class="sourceLineNo">182</span>        public Set&lt;Node&lt;N&gt;&gt; getModifiableNodeSet() {<a name="line.182"></a>
+<span class="sourceLineNo">183</span>                return graph.keySet();<a name="line.183"></a>
+<span class="sourceLineNo">184</span>        }<a name="line.184"></a>
+<span class="sourceLineNo">185</span>        <a name="line.185"></a>
+<span class="sourceLineNo">186</span>        /**<a name="line.186"></a>
+<span class="sourceLineNo">187</span>         * Returns a set containing Edge objects whose parent Node is<a name="line.187"></a>
+<span class="sourceLineNo">188</span>         * the specified Node object. Return an empty set if no Edge<a name="line.188"></a>
+<span class="sourceLineNo">189</span>         * object's parent Node is the specified Node.<a name="line.189"></a>
+<span class="sourceLineNo">190</span>         * @param node: the specified Node object.<a name="line.190"></a>
+<span class="sourceLineNo">191</span>         * @requires the node cannot be null.<a name="line.191"></a>
+<span class="sourceLineNo">192</span>         * @return a unmodifiable set of Edge object whose key is the<a name="line.192"></a>
+<span class="sourceLineNo">193</span>         * specified Node object. Return an empty set if this Graph doesn't<a name="line.193"></a>
+<span class="sourceLineNo">194</span>         * contain the specified key<a name="line.194"></a>
+<span class="sourceLineNo">195</span>         */<a name="line.195"></a>
+<span class="sourceLineNo">196</span>        public Set&lt;Edge&lt;N, E&gt;&gt; getEdgeSet(Node&lt;N&gt; node) {<a name="line.196"></a>
+<span class="sourceLineNo">197</span>                if (!graph.containsKey(node)) {<a name="line.197"></a>
+<span class="sourceLineNo">198</span>                        return Collections.unmodifiableSet(new HashSet&lt;Edge&lt;N, E&gt;&gt;());<a name="line.198"></a>
+<span class="sourceLineNo">199</span>                }<a name="line.199"></a>
+<span class="sourceLineNo">200</span>                return Collections.unmodifiableSet(graph.get(node));<a name="line.200"></a>
+<span class="sourceLineNo">201</span>        }<a name="line.201"></a>
+<span class="sourceLineNo">202</span>        <a name="line.202"></a>
+<span class="sourceLineNo">203</span>        /**<a name="line.203"></a>
+<span class="sourceLineNo">204</span>         * Returns a set containing Edge objects whose parent Node is<a name="line.204"></a>
+<span class="sourceLineNo">205</span>         * the specified Node object. Return an empty set if no Edge<a name="line.205"></a>
+<span class="sourceLineNo">206</span>         * object's parent Node is the specified Node.<a name="line.206"></a>
+<span class="sourceLineNo">207</span>         * @param node: the specified Node object.<a name="line.207"></a>
+<span class="sourceLineNo">208</span>         * @requires the node cannot be null.<a name="line.208"></a>
+<span class="sourceLineNo">209</span>         * @return a modifiable set of Edge object whose key is the<a name="line.209"></a>
+<span class="sourceLineNo">210</span>         * specified Node object. Return an empty set if this Graph doesn't<a name="line.210"></a>
+<span class="sourceLineNo">211</span>         * contain the specified key<a name="line.211"></a>
+<span class="sourceLineNo">212</span>         */     <a name="line.212"></a>
+<span class="sourceLineNo">213</span>        public Set&lt;Edge&lt;N, E&gt;&gt; getModifiableEdgeSet(Node&lt;N&gt; node) {<a name="line.213"></a>
+<span class="sourceLineNo">214</span>                if (!graph.containsKey(node)) {<a name="line.214"></a>
+<span class="sourceLineNo">215</span>                        return new HashSet&lt;Edge&lt;N, E&gt;&gt;();<a name="line.215"></a>
+<span class="sourceLineNo">216</span>                }<a name="line.216"></a>
+<span class="sourceLineNo">217</span>                return graph.get(node);<a name="line.217"></a>
+<span class="sourceLineNo">218</span>        }<a name="line.218"></a>
+<span class="sourceLineNo">219</span>        <a name="line.219"></a>
+<span class="sourceLineNo">220</span>        /**<a name="line.220"></a>
+<span class="sourceLineNo">221</span>         * Returns a set containing all the Edge objects in this Graph<a name="line.221"></a>
+<span class="sourceLineNo">222</span>         * @return a unmodifiable set of all Edge objects in this Graph<a name="line.222"></a>
+<span class="sourceLineNo">223</span>         */<a name="line.223"></a>
+<span class="sourceLineNo">224</span>        public Set&lt;Edge&lt;N, E&gt;&gt; getEdgeSets() {<a name="line.224"></a>
+<span class="sourceLineNo">225</span>                Set&lt;Edge&lt;N, E&gt;&gt; set = new HashSet&lt;Edge&lt;N, E&gt;&gt;();<a name="line.225"></a>
+<span class="sourceLineNo">226</span>                for (Set&lt;Edge&lt;N, E&gt;&gt; edgeSet: graph.values()) {<a name="line.226"></a>
+<span class="sourceLineNo">227</span>                        for (Edge&lt;N, E&gt; e: edgeSet) {<a name="line.227"></a>
+<span class="sourceLineNo">228</span>                                set.add(e);<a name="line.228"></a>
+<span class="sourceLineNo">229</span>                        }<a name="line.229"></a>
+<span class="sourceLineNo">230</span>                }<a name="line.230"></a>
+<span class="sourceLineNo">231</span>                return set;<a name="line.231"></a>
+<span class="sourceLineNo">232</span>        }<a name="line.232"></a>
+<span class="sourceLineNo">233</span>        <a name="line.233"></a>
+<span class="sourceLineNo">234</span>        /** <a name="line.234"></a>
+<span class="sourceLineNo">235</span>         * check whether the representation invariant holds<a name="line.235"></a>
+<span class="sourceLineNo">236</span>         */<a name="line.236"></a>
+<span class="sourceLineNo">237</span>        private void checkRep() {<a name="line.237"></a>
+<span class="sourceLineNo">238</span>                assert(graph != null): "graph cannot be null";<a name="line.238"></a>
+<span class="sourceLineNo">239</span>                if (DEBUG_FLAG) {<a name="line.239"></a>
+<span class="sourceLineNo">240</span>                        Set&lt;Node&lt;N&gt;&gt; nodes = graph.keySet();<a name="line.240"></a>
+<span class="sourceLineNo">241</span>                        for (Node&lt;N&gt; node: nodes) {<a name="line.241"></a>
+<span class="sourceLineNo">242</span>                                assert(node != null) : "node cannot be null";<a name="line.242"></a>
+<span class="sourceLineNo">243</span>                                Set&lt;Edge&lt;N, E&gt;&gt; edgeSet = graph.get(node);<a name="line.243"></a>
+<span class="sourceLineNo">244</span>                                for (Edge&lt;N, E&gt; edge: edgeSet) {<a name="line.244"></a>
+<span class="sourceLineNo">245</span>                                        assert(edge != null) : "edge cannot be null";<a name="line.245"></a>
+<span class="sourceLineNo">246</span>                                }<a name="line.246"></a>
+<span class="sourceLineNo">247</span>                        }<a name="line.247"></a>
+<span class="sourceLineNo">248</span>                }<a name="line.248"></a>
+<span class="sourceLineNo">249</span>        }<a name="line.249"></a>
+<span class="sourceLineNo">250</span>}<a name="line.250"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</div>
+</body>
+</html>

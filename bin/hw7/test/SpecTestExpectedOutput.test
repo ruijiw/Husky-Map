@@ -1,0 +1,11 @@
+#Test whether AddEdges and ListChildren command works correctly
+
+CreateGraph test
+AddNode test A
+AddNode test C
+AddNode test B
+
+AddEdge test A C 0.55
+AddEdge test A C 0.101
+
+ListChildren test A

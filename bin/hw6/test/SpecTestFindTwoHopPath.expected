@@ -1,0 +1,18 @@
+# Find a path using the LOLDictionary dataSet.
+# This test uses both the parser and BFS algorithm in the MarvelPaths
+# class and applies to a targeted dataset. This test is for one
+# character have two hop("edge") path to another character.
+
+loaded graph dictionary
+
+path from CATLYN to VI:
+CATLYN to TEEMO via ADC
+TEEMO to VI via JUNGLE
+
+path from RIVEN to SIVIR:
+RIVEN to TEEMO via TOP
+TEEMO to SIVIR via ADC
+
+path from VI to AHRI:
+VI to TEEMO via JUNGLE
+TEEMO to AHRI via MID

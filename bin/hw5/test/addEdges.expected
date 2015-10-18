@@ -1,0 +1,36 @@
+# Specification testing file.
+# Tests that a graph can be created, multiple nodes and
+# multiple edges can be added, and all nodes with all edges
+# can be printed out.
+
+
+# Create a graph
+created graph graph1
+
+# Add multiple nodes
+added node n1 to graph1
+added node n2 to graph1
+added node n3 to graph1
+added node n4 to graph1
+added node n5 to graph1
+added node n6 to graph1
+added node n7 to graph1
+
+# Add multiple edges
+added edge e1 from n1 to n2 in graph1
+added edge e2 from n2 to n3 in graph1
+added edge e3 from n3 to n4 in graph1
+added edge e4 from n4 to n5 in graph1
+added edge e5 from n5 to n6 in graph1
+added edge e6 from n6 to n7 in graph1
+added edge e7 from n7 to n1 in graph1
+
+# Print all nodes and all edges in the graph
+graph1 contains: n1 n2 n3 n4 n5 n6 n7
+the children of n1 in graph1 are: n2(e1)
+the children of n2 in graph1 are: n3(e2)
+the children of n3 in graph1 are: n4(e3)
+the children of n4 in graph1 are: n5(e4) 
+the children of n5 in graph1 are: n6(e5)
+the children of n6 in graph1 are: n7(e6)
+the children of n7 in graph1 are: n1(e7)

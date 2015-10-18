@@ -1,0 +1,42 @@
+a. 1 Abstract Function:
+	 Each element of IntQueue1 is mapped to the corresponding element of the integer linked list.
+	
+	 Representation invariant:
+	 entries != null &&
+	 foreach Integer i in IntQueue1, i != null
+ 
+	2 Abstract Function:
+	Each element of IntQueue2 is mapped to the corresponding element of the integer array. 
+	The front of IntQueue2 is mapped to an index on entries. 
+	The size of IntQueue2 is mapped to the number of the element in the entries.
+	
+	Representation invariant:
+	entries != null &&
+	front != null && 0 <= front < INITIAL_SIZE
+	size != null && 0 <= size < INITIAL_SIZE
+	
+b. According to clients,
+	a, d, g are equivalent
+	c, f are equivalent
+	b, h are equivalent
+	
+c. 1. It's impossible to expose representation because the return type is a primitive 
+	  data type, integer. A primitive data type is immutable.
+	
+   2. It's possible to expose representation if the actual representation is an array
+   	  of Strings and it is not private final. If no new String arrays are constructed, 
+   	  the representation can be changed by returning the String array.
+   
+   3. It's possible to expose representation if the method is called by other public 
+      methods. If no new Date objects are constructed in the object, the representation 
+      can be changed by returning the Date.
+      
+   4. It's impossible to expose representation because the return value is a String,
+   	  an immutable object. 
+      
+   5. It's possible to expose representation if the iterator is on the actual representation.
+   	  The representation can be changed by iterating through its elements.
+   	  
+   6. It's possible to expose representation if the constructor doesn't copy all the
+   	  elements in cards but referencing to cards instead. Thus, Deck can be changed
+   	  by changing cards.

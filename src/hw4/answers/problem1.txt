@@ -1,0 +1,22 @@
+1. The constructor would be less complex because it doesn't need to ensure the denom and numer 
+   are in reduced forms. The codes about gcd can be eliminated. 
+   
+   checkRep() would be less complex because it doesn't need to check whether the denom and numer 
+   are in reduced form.
+   
+   equals() would be more complex because the two RatNum objects have to be converted to reduced form
+   before comparison so that the equal objects have the same denom and number. (eg. 1/2 and 2/4) 
+   It need to add the codes about gcd.
+   
+   toString() would be more complex because the RatNum object have to be converted to reduced form
+   since the specification states that the string representation of RatNum should be in reduced form.
+   It need to add the codes about gcd.
+   
+2. The specifications of these methods don't mention @modifies clauses and the @requires clause. 
+   However, the specification of the entire class states that it is immutable. 
+   Thus, the fields of the class cannot be modified and the suggested method is wrong.
+   
+3. It's sufficient to call only at the end of the constructors because other methods cannot modify
+   a RatNum: RatNum is a immutable class and the fields of it is private final. Only constructors can 
+   modify the fields. The other methods would return a newly created RatNum that rep inv will be checked
+   while constructing.

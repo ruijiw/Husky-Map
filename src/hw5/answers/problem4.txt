@@ -1,0 +1,9 @@
+My representation is an adjacency list. It is a map containing nodes and edges. The key of the map are nodes and 
+the values of the map are sets of edges. Edges would be mapped to a key if the key is its parent node. 
+
+I choose that representation because it is easy to get an out-going edge of a vertex, to insert an edge 
+and lookup a vertex.
+
+A collection of edges is easy to add and delete edges.
+
+An adjacency matrix is easy to decide containNode and containEdge and to insert an edge.

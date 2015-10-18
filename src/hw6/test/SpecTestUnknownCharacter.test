@@ -1,0 +1,12 @@
+# Find a path using the LOLDictionary dataSet.
+# This test uses both the parser and BFS algorithm in the MarvelPaths
+# class and applies to a targeted dataset. This test is for the
+# unknown characters case.
+
+LoadGraph dictionary LOLDictionary.tsv
+
+FindPath dictionary TEEMO UNKNOWN
+
+FindPath dictionary UNKNOWN JINX
+
+FindPath dictionary UNKNOWN_A UNKNOWN_B

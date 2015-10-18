@@ -1,0 +1,6 @@
+1. set boolean constant for checkRep in my Graph ADT. The expensive version of checkRep() 
+ensure there are no null keys and nulls values in graph with a complexity of O(n^2). 
+It would slow down findPath() and loadGraph() a lot.
+
+2. remove the contain edge check in the addEdge method when adding the edge to the set.
+Because add method of set can return whether the addition is successful or not.

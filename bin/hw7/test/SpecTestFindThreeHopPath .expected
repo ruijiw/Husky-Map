@@ -1,0 +1,18 @@
+# Find a path using the LOLDictionary dataSet.
+# This test uses the parser, the MarvelPaths2's setUpGraph
+# and Dijkstra algorithm and applies to a targeted dataSet.
+# This test is for one character have 3 hop("edge") path to another character.
+
+loaded graph dictionary
+
+path from VI to SONA:
+VI to TEEMO with weight 0.500
+TEEMO to JINX with weight 1.000
+JINX to SONA with weight 1.000
+total cost: 2.500
+
+path from SONA to AHRI:
+SONA to JINX with weight 1.000
+JINX to TEEMO with weight 1.000
+TEEMO to AHRI with weight 1.000
+total cost: 3.000

@@ -1,0 +1,16 @@
+# Find a path using the LOLDictionary dataSet.
+# This test uses the parser, the MarvelPaths2's setUpGraph
+# and Dijkstra algorithm and applies to a targeted dataSet.
+# This test is for one character have two hop("edge") path to another character.
+
+loaded graph dictionary
+
+path from CATLYN to VI:
+CATLYN to TEEMO with weight 1.000
+TEEMO to VI with weight 0.500
+total cost: 1.500
+
+path from RIVEN to SIVIR:
+RIVEN to TEEMO with weight 1.000
+TEEMO to SIVIR with weight 0.500
+total cost: 1.500

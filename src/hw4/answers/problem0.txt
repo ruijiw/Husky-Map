@@ -1,0 +1,31 @@
+1. r = p * q:
+	set r be an empty polynomial
+	foreach term, t_p, in p:
+		foreach term, t_q, in q:
+			insert the product of t_p and t_q to r
+			sort the r and add the terms with the same degree
+2. q = u / v:
+	set r = u be making a term-by-term copy in u to r
+	set q be an empty polynomial
+	while r is not empty and the degree of v is less than the degree of r
+		divide the highest degree term t_r, in r, by the highest degree term t_v, in v
+		insert the quotient to q
+		subtract the product of v and the quotient from r
+3.  u = x^3+x-1
+	v = x+1
+	r = a copy of u = x^3+x-1
+	q is empty
+	while r is not empty and the degree of v is less than the degree of r
+		Iteration 1: t_r = x^3, t_v = x, u = x^3+x-1, v = x+1, r = x^3+x-1, q is empty
+			[divide the highest degree term t_r, in r, by the highest degree term t_v, in v] t_r / t_v = x^2
+			[insert the quotient to q] q = x^2
+			[subtract the product of v and the quotient from r] r = -x^2+x-1
+		Iteration 2: t_r = -x^2, t_v = x, u = x^3+x-1, v = x+1, r = -x^2+x-1, q = x^2
+			[divide the highest degree term t_r, in r, by the highest degree term t_v, in v] t_r / t_v = -x
+			[insert the quotient to q] q = x^2-x
+			[subtract the product of v and the quotient from r] r = 2x-1
+		Iteration 3: t_r = 2x, t_v = x, u = x^3+x-1, v = x+1, r = 2x-1, q = x^2-x
+			[divide the highest degree term t_r, in r, by the highest degree term t_v, in v] t_r / t_v = 2
+			[insert the quotient to q] q = x^2-x+2
+			[subtract the product of v and the quotient from r] r = -3
+	We are done! q = x^2-x+2
